@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Distrito Arocena | Plataforma de Experiencias Culturales - Museo Arocena</title>
+  
+  <!-- Google Fonts: Playfair Display & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            terracota: {
+              DEFAULT: '#b85d3e',
+              dark: '#8f3e24',
+              light: '#d47b5e'
+            },
+            crema: '#faf7f2',
+            beige: '#f3ece2',
+            charcoal: '#1c1b1a',
+            dorado: '#c99b4a'
+          },
+          fontFamily: {
+            editorial: ['Playfair Display', 'Georgia', 'serif'],
+            sans: ['Plus Jakarta Sans', 'system-ui', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Estilos Custom -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-[#faf7f2] text-stone-900 min-h-screen flex flex-col antialiased">
+
+  <!-- ============================================================== -->
+  <!-- NAVEGACIÓN SUPERIOR / NAVBAR                                   -->
+  <!-- ============================================================== -->
+  <header class="sticky top-0 z-40 bg-[#faf7f2]/90 backdrop-blur-md border-b border-stone-200/80 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo e Identidad -->
+      <a href="#inicio" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-terracota flex items-center justify-center text-white font-editorial font-bold text-xl shadow-md group-hover:bg-terracota-dark transition-colors">
+          A
+        </div>
+        <div>
+          <span class="block text-xs uppercase tracking-widest font-extrabold text-stone-500">MUSEO AROCENA • TORREÓN</span>
+          <span class="font-editorial text-xl font-bold tracking-tight text-stone-900 group-hover:text-terracota transition-colors">DISTRITO AROCENA</span>
+        </div>
+      </a>
+
+      <!-- Enlaces Centrales (Desktop) -->
+      <nav class="hidden md:flex items-center gap-7 text-xs font-semibold uppercase tracking-wider text-stone-700">
+        <a href="#inicio" class="hover:text-terracota transition-colors">Inicio</a>
+        <a href="#catalogo-section" class="hover:text-terracota transition-colors">Experiencias</a>
+        <a href="#agenda-section" class="hover:text-terracota transition-colors">Agenda</a>
+        <a href="#comunidad-section" class="hover:text-terracota transition-colors">Comunidad</a>
+        <button onclick="openAdminDashboard()" class="text-terracota hover:text-terracota-dark flex items-center gap-1">
+          <i data-lucide="bar-chart-3" class="w-3.5 h-3.5"></i>
+          <span>Panel Museo</span>
+        </button>
+      </nav>
+
+      <!-- Botón de Registro QR / Perfil del Usuario -->
+      <div class="flex items-center gap-3">
+        <button 
+          id="user-badge-btn"
+          onclick="openOnboardingModal()" 
+          class="px-4 py-2.5 rounded-xl text-xs font-bold bg-white hover:bg-stone-50 text-stone-800 border border-stone-300 shadow-sm transition-all flex items-center gap-2"
+        >
+          <i data-lucide="qr-code" class="w-4 h-4 text-terracota"></i>
+          <span>Escanear QR / Registrar</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============================================================== -->
+  <!-- HERO SECTION                                                   -->
+  <!-- ============================================================== -->
+  <section id="inicio" class="relative bg-stone-900 text-white overflow-hidden py-24 lg:py-32">
+    <!-- Imagen de fondo con overlay cinematográfico -->
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="https://images.unsplash.com/photo-1518998053901-5348d3961a04?auto=format&fit=crop&w=1920&q=80" 
+        alt="Patios y Arte del Museo Arocena" 
+        class="w-full h-full object-cover object-center opacity-40 scale-105"
+      >
+      <div class="absolute inset-0 bg-gradient-to-t from-stone-950 via-stone-950/70 to-transparent"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      
+      <!-- Badge de Lema Oficial -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-stone-800/80 border border-amber-300/30 text-amber-200 text-xs font-semibold tracking-wide backdrop-blur-md mb-6">
+        <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-300"></i>
+        <span>El arte se vive, la cultura se comparte y siempre hay una razón para volver</span>
+      </div>
+
+      <!-- Título Principal -->
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-editorial font-bold tracking-tight text-white max-w-4xl mx-auto leading-tight mb-6">
+        Una nueva forma de habitar el <span class="italic text-amber-300 font-normal">Museo Arocena</span>
+      </h1>
+
+      <!-- Descripción -->
+      <p class="text-base sm:text-lg text-stone-300 max-w-2xl mx-auto font-light leading-relaxed mb-10">
+        Conectamos a Torreón y la Comarca Lagunera con experiencias gastronómicas de autor, catas de vino de Coahuila, talleres creativos y veladas bajo las estrellas en nuestros patios históricos.
+      </p>
+
+      <!-- Botones de Acción Principal -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a 
+          href="#catalogo-section" 
+          class="w-full sm:w-auto px-8 py-3.5 rounded-xl font-bold text-sm bg-terracota hover:bg-terracota-dark text-white shadow-lg shadow-terracota/30 transition-all flex items-center justify-center gap-2 group"
+        >
+          <span>Descubre tu experiencia</span>
+          <i data-lucide="arrow-down" class="w-4 h-4 group-hover:translate-y-0.5 transition-transform"></i>
+        </a>
+
+        <button 
+          id="hero-personalize-btn"
+          onclick="openOnboardingModal()" 
+          class="w-full sm:w-auto px-7 py-3.5 rounded-xl font-bold text-sm bg-white/10 hover:bg-white/20 text-white border border-white/20 backdrop-blur-md transition-all flex items-center justify-center gap-2"
+        >
+          <i data-lucide="sliders-horizontal" class="w-4 h-4"></i>
+          <span>Personalizar mis intereses (QR)</span>
+        </button>
+      </div>
+
+      <!-- Tarjetas de Categorías Rápidas -->
+      <div id="featured-categories-grid" class="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 text-left">
+        <!-- Renderizado dinámicamente con JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- SECCIÓN DINÁMICA: RECOMENDACIONES SEGÚN TUS INTERESES          -->
+  <!-- ============================================================== -->
+  <section id="recommendations-section" class="py-12 bg-amber-50/50 border-b border-amber-900/10 hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-3">
+        <div>
+          <span class="text-xs uppercase tracking-widest font-extrabold text-terracota flex items-center gap-1.5">
+            <i data-lucide="sparkles" class="w-4 h-4"></i>
+            Recomendaciones para ti
+          </span>
+          <h2 class="text-2xl font-editorial font-bold text-stone-900">
+            Experiencias seleccionadas según tus gustos
+          </h2>
+          <p class="text-xs text-stone-500 mt-0.5">
+            Intereses activos: <span id="user-interests-tags" class="font-semibold text-stone-800"></span>
+          </p>
+        </div>
+        <button onclick="openOnboardingModal()" class="text-xs font-bold text-terracota hover:underline flex items-center gap-1 self-start md:self-auto">
+          <span>Cambiar mis intereses</span>
+          <i data-lucide="chevron-right" class="w-3.5 h-3.5"></i>
+        </button>
+      </div>
+
+      <div id="recommendations-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+        <!-- Renderizado con JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- SECCIÓN: VIVE DISTRITO AROCENA (CATÁLOGO DE EXPERIENCIAS)      -->
+  <!-- ============================================================== -->
+  <section id="catalogo-section" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-grow">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+      <div>
+        <span class="text-xs uppercase tracking-widest font-extrabold text-terracota">CATÁLOGO EXCLUSIVO</span>
+        <h2 class="text-3xl sm:text-4xl font-editorial font-bold text-stone-900 mt-1">
+          Vive Distrito Arocena
+        </h2>
+        <p class="text-sm text-stone-600 mt-1 max-w-xl">
+          Selecciona una experiencia y asegura tu lugar. Contamos con aforo limitado para garantizar un encuentro íntimo y de calidad.
+        </p>
+      </div>
+
+      <!-- Barra de Búsqueda Rápida -->
+      <div class="relative w-full md:w-72">
+        <i data-lucide="search" class="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400"></i>
+        <input 
+          type="text" 
+          placeholder="Buscar por chef, vino, arte..." 
+          oninput="handleSearch(event)"
+          class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-stone-200 bg-white text-xs text-stone-800 focus:outline-none focus:ring-2 focus:ring-terracota/30 focus:border-terracota transition-all shadow-sm"
+        >
+      </div>
+    </div>
+
+    <!-- Pestañas de Filtro por Categoría -->
+    <div class="flex items-center gap-2 overflow-x-auto pb-4 mb-8 text-xs font-semibold no-scrollbar">
+      <button 
+        onclick="filterByCategory('all')" 
+        data-category="all" 
+        class="filter-btn px-4 py-2 rounded-xl bg-terracota text-white shadow-md transition-all whitespace-nowrap"
+      >
+        Todas las experiencias
+      </button>
+      <button 
+        onclick="filterByCategory('gastronomia')" 
+        data-category="gastronomia" 
+        class="filter-btn px-4 py-2 rounded-xl bg-white text-stone-700 border border-stone-200 hover:bg-stone-50 transition-all whitespace-nowrap"
+      >
+        Gastronomía
+      </button>
+      <button 
+        onclick="filterByCategory('vino')" 
+        data-category="vino" 
+        class="filter-btn px-4 py-2 rounded-xl bg-white text-stone-700 border border-stone-200 hover:bg-stone-50 transition-all whitespace-nowrap"
+      >
+        Cultura del Vino
+      </button>
+      <button 
+        onclick="filterByCategory('arte')" 
+        data-category="arte" 
+        class="filter-btn px-4 py-2 rounded-xl bg-white text-stone-700 border border-stone-200 hover:bg-stone-50 transition-all whitespace-nowrap"
+      >
+        Arte & Exposiciones
+      </button>
+      <button 
+        onclick="filterByCategory('social')" 
+        data-category="social" 
+        class="filter-btn px-4 py-2 rounded-xl bg-white text-stone-700 border border-stone-200 hover:bg-stone-50 transition-all whitespace-nowrap"
+      >
+        Música & Sociales
+      </button>
+      <button 
+        onclick="filterByCategory('talleres')" 
+        data-category="talleres" 
+        class="filter-btn px-4 py-2 rounded-xl bg-white text-stone-700 border border-stone-200 hover:bg-stone-50 transition-all whitespace-nowrap"
+      >
+        Talleres Creativos
+      </button>
+    </div>
+
+    <!-- Grid de Experiencias -->
+    <div id="experiences-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Inyectado dinámicamente con app.js -->
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- SECCIÓN: AGENDA CULTURAL Y CALENDARIO                          -->
+  <!-- ============================================================== -->
+  <section id="agenda-section" class="py-16 bg-[#f3ece2] border-t border-stone-300/50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12">
+        <span class="text-xs uppercase tracking-widest font-extrabold text-terracota">CALENDARIO DE NOVIEMBRE & DICIEMBRE 2026</span>
+        <h2 class="text-3xl font-editorial font-bold text-stone-900 mt-1">Agenda Cultural Distrito Arocena</h2>
+        <p class="text-xs text-stone-600 mt-2">
+          Planea tus fines de semana en el Centro Histórico de Torreón. Te recomendamos reservar con anticipación debido al aforo reservado por sala.
+        </p>
+      </div>
+
+      <!-- Tarjetas de Cronograma Rápido -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200/80 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs font-bold text-terracota uppercase tracking-wider">Viernes 28 Nov</span>
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">20:00 hrs</span>
+            </div>
+            <h4 class="text-lg font-editorial font-bold text-stone-900 mb-1">Noche de Jazz & Vinos de Coahuila</h4>
+            <p class="text-xs text-stone-500 mb-4">Patio Central Arocena • Maridaje de 4 etiquetas de Parras</p>
+          </div>
+          <button onclick="openBookingModal('exp-1')" class="w-full py-2 text-xs font-bold text-terracota bg-terracota/10 hover:bg-terracota/20 rounded-xl transition-colors">
+            Reservar boleto
+          </button>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200/80 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs font-bold text-terracota uppercase tracking-wider">Sábado 29 Nov</span>
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-amber-100 text-amber-800">19:30 hrs</span>
+            </div>
+            <h4 class="text-lg font-editorial font-bold text-stone-900 mb-1">Cena-Galería: Maestros del Virreinato</h4>
+            <p class="text-xs text-stone-500 mb-4">Terraza Mirador • Chef Mariana Sotomayor</p>
+          </div>
+          <button onclick="openBookingModal('exp-2')" class="w-full py-2 text-xs font-bold text-terracota bg-terracota/10 hover:bg-terracota/20 rounded-xl transition-colors">
+            Reservar boleto
+          </button>
+        </div>
+
+        <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-200/80 flex flex-col justify-between">
+          <div>
+            <div class="flex justify-between items-center mb-3">
+              <span class="text-xs font-bold text-terracota uppercase tracking-wider">Jueves 3 Dic</span>
+              <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">Acceso Libre</span>
+            </div>
+            <h4 class="text-lg font-editorial font-bold text-stone-900 mb-1">Recorrido Nocturno a la Luz de las Velas</h4>
+            <p class="text-xs text-stone-500 mb-4">Salas Históricas • Mtro. Carlos González</p>
+          </div>
+          <button onclick="openBookingModal('exp-3')" class="w-full py-2 text-xs font-bold text-terracota bg-terracota/10 hover:bg-terracota/20 rounded-xl transition-colors">
+            Registrar asistencia
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- SECCIÓN: COMUNIDAD LAGUNERA Y TESTIMONIOS                     -->
+  <!-- ============================================================== -->
+  <section id="comunidad-section" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+      <div>
+        <span class="text-xs uppercase tracking-widest font-extrabold text-terracota">MEMORIAS & VÍNCULO REGIONAL</span>
+        <h2 class="text-3xl font-editorial font-bold text-stone-900 mt-1">Comunidad Distrito Arocena</h2>
+        <p class="text-xs text-stone-600 mt-1 max-w-xl">
+          El museo vive a través de la gente de La Laguna. Así relatan su experiencia nuestros visitantes, chefs y artistas colaboradores.
+        </p>
+      </div>
+
+      <!-- Botón de Simulación de Notificaciones Post-Visita -->
+      <button 
+        onclick="openPostVisitModal()" 
+        class="px-4 py-2.5 rounded-xl text-xs font-bold text-stone-800 bg-white border border-stone-300 hover:bg-stone-50 transition-all flex items-center gap-2 shadow-sm self-start md:self-auto"
+      >
+        <i data-lucide="message-square" class="w-4 h-4 text-terracota"></i>
+        <span>Ver seguimiento post-visita (Demo)</span>
+      </button>
+    </div>
+
+    <!-- Grid de Historias -->
+    <div id="community-stories-grid" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <!-- Renderizado con JS -->
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- BANNER DE CIERRE: INVITACIÓN QR EN EL MUSEO                   -->
+  <!-- ============================================================== -->
+  <section class="bg-terracota text-white py-14">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div class="w-14 h-14 rounded-2xl bg-white/10 mx-auto flex items-center justify-center mb-4 border border-white/20">
+        <i data-lucide="qr-code" class="w-8 h-8 text-amber-200"></i>
+      </div>
+      <h3 class="text-2xl sm:text-3xl font-editorial font-bold mb-2">
+        ¿Estás actualmente en el Museo Arocena?
+      </h3>
+      <p class="text-xs sm:text-sm text-amber-100 max-w-xl mx-auto mb-6">
+        Escanea los códigos QR ubicados en las salas para registrar tu visita, personalizar tus recomendaciones y recibir invitaciones preferenciales a las próximas catas y cenas.
+      </p>
+      <button 
+        onclick="openOnboardingModal()" 
+        class="px-6 py-3 rounded-xl font-bold text-xs uppercase tracking-wider bg-white text-terracota-dark hover:bg-amber-50 shadow-lg transition-all"
+      >
+        Simular escaneo de QR en sala
+      </button>
+    </div>
+  </section>
+
+  <!-- ============================================================== -->
+  <!-- FOOTER                                                         -->
+  <!-- ============================================================== -->
+  <footer class="bg-stone-900 text-stone-400 py-12 border-t border-stone-800 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+      
+      <div class="md:col-span-2">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-8 h-8 rounded-lg bg-terracota text-white font-editorial font-bold flex items-center justify-center">
+            A
+          </div>
+          <span class="text-base font-editorial font-bold text-white tracking-wide">DISTRITO AROCENA</span>
+        </div>
+        <p class="text-stone-400 leading-relaxed max-w-sm mb-4">
+          Una iniciativa del Museo Arocena para fomentar el encuentro cultural, social y gastronómico en Torreón, Coahuila.
+        </p>
+        <p class="text-[11px] text-stone-500">
+          Calle Cepeda 354 sur, Centro Histórico, C.P. 27000, Torreón, Coahuila, México.
+        </p>
+      </div>
+
+      <div>
+        <h5 class="text-white font-bold uppercase tracking-wider text-[11px] mb-3">Horarios del Museo</h5>
+        <ul class="space-y-1.5 text-stone-400">
+          <li>Martes a Domingo: 10:00 a 18:00 hrs</li>
+          <li>Jueves y Viernes (Noches Arocena): Hasta las 23:00 hrs</li>
+          <li>Lunes: Cerrado al público</li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 class="text-white font-bold uppercase tracking-wider text-[11px] mb-3">Herramientas</h5>
+        <ul class="space-y-2 text-stone-400">
+          <li>
+            <button onclick="openAdminDashboard()" class="hover:text-amber-300 transition-colors flex items-center gap-1.5">
+              <i data-lucide="shield-check" class="w-3.5 h-3.5 text-terracota"></i>
+              <span>Panel de Dirección (Admin)</span>
+            </button>
+          </li>
+          <li>
+            <button onclick="openPostVisitModal()" class="hover:text-amber-300 transition-colors flex items-center gap-1.5">
+              <i data-lucide="bell" class="w-3.5 h-3.5 text-terracota"></i>
+              <span>Simulador de Notificaciones</span>
+            </button>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 border-t border-stone-800/80 flex flex-col sm:flex-row justify-between items-center text-[11px] text-stone-500">
+      <p>© 2026 Museo Arocena. Prototipo de Plataforma Digital interactiva.</p>
+      <p class="mt-2 sm:mt-0 font-editorial italic text-stone-400">“El arte se vive, la cultura se comparte.”</p>
+    </div>
+  </footer>
+
+  <!-- ============================================================== -->
+  <!-- MODALES INTERACTIVOS                                          -->
+  <!-- ============================================================== -->
+
+  <!-- 1. Modal: Detalle de Experiencia -->
+  <div id="detail-modal" class="modal-backdrop fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div id="detail-modal-content" class="bg-white rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl modal-enter modal-enter-active max-h-[90vh] overflow-y-auto">
+      <!-- Inyectado por JS -->
+    </div>
+  </div>
+
+  <!-- 2. Modal: Reservación & Flujo de Asistencia -->
+  <div id="booking-modal" class="modal-backdrop fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div id="booking-modal-content" class="bg-white rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl modal-enter modal-enter-active">
+      <!-- Inyectado por JS -->
+    </div>
+  </div>
+
+  <!-- 3. Modal: Pase Digital Generado (Ticket con QR) -->
+  <div id="ticket-modal" class="modal-backdrop fixed inset-0 z-50 bg-black/85 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div id="ticket-modal-container" class="w-full max-w-md p-2">
+      <!-- Inyectado por JS -->
+    </div>
+  </div>
+
+  <!-- 4. Modal: Onboarding / Registro QR & Selección de Intereses -->
+  <div id="onboarding-modal" class="modal-backdrop fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl max-w-lg w-full p-6 md:p-8 shadow-2xl modal-enter modal-enter-active">
+      <div class="flex justify-between items-start mb-4">
+        <div>
+          <span class="text-xs font-bold text-terracota uppercase tracking-widest">BIENVENIDO AL MUSEO AROCENA</span>
+          <h3 class="text-2xl font-editorial font-bold text-stone-900 mt-0.5">Personaliza tu Experiencia</h3>
+        </div>
+        <button onclick="closeModal('onboarding-modal')" class="text-stone-400 hover:text-stone-700">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <p class="text-xs text-stone-600 mb-6 leading-relaxed">
+        Cuéntanos qué actividades disfrutas más para sugerirte eventos afines a tus gustos culinarios, enológicos o artísticos en Torreón.
+      </p>
+
+      <div class="space-y-4 mb-6">
+        <div>
+          <label class="block text-xs font-bold text-stone-700 uppercase tracking-wide mb-1">Nombre completo</label>
+          <input type="text" id="input-user-name" placeholder="Tu nombre" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-terracota focus:border-terracota outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-stone-700 uppercase tracking-wide mb-1">Correo electrónico</label>
+          <input type="email" id="input-user-email" placeholder="correo@ejemplo.com" class="w-full px-3.5 py-2.5 rounded-xl border border-stone-300 text-sm focus:ring-2 focus:ring-terracota focus:border-terracota outline-none">
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-stone-700 uppercase tracking-wide mb-2">Selecciona tus temas de interés:</label>
+          <div id="interests-chips-container" class="flex flex-wrap gap-2">
+            <!-- Chips inyectados por JS -->
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-3 pt-4 border-t border-stone-200">
+        <button onclick="closeModal('onboarding-modal')" class="px-5 py-2.5 text-xs font-semibold text-stone-600 hover:text-stone-900">
+          Cancelar
+        </button>
+        <button onclick="saveOnboardingProfile()" class="px-6 py-2.5 text-xs font-bold text-white bg-terracota hover:bg-terracota-dark rounded-xl shadow-md transition-colors flex items-center gap-2">
+          <i data-lucide="check" class="w-4 h-4"></i>
+          Guardar y Activar Recomendaciones
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5. Modal: Simulador de Seguimiento Post-Visita (Email / WhatsApp) -->
+  <div id="postvisit-modal" class="modal-backdrop fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-2xl max-w-2xl w-full p-6 md:p-8 shadow-2xl modal-enter modal-enter-active max-h-[90vh] overflow-y-auto">
+      <div class="flex justify-between items-start mb-4">
+        <div>
+          <span class="text-xs font-bold text-terracota uppercase tracking-widest">COMUNICACIÓN CON EL VISITANTE</span>
+          <h3 class="text-2xl font-editorial font-bold text-stone-900 mt-0.5">Seguimiento Post-Visita (Simulación)</h3>
+        </div>
+        <button onclick="closeModal('postvisit-modal')" class="text-stone-400 hover:text-stone-700">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+      </div>
+
+      <p class="text-xs text-stone-600 mb-6">
+        Distrito Arocena mantiene el vínculo emocional y cultural con los visitantes después de su recorrido, enviando recordatorios amables y sugerencias exclusivas sin saturar.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        
+        <!-- Canal 1: Correo Electrónico Editorial -->
+        <div class="bg-stone-50 rounded-xl p-4 border border-stone-200 text-xs">
+          <div class="flex items-center gap-2 text-stone-700 font-bold mb-3 pb-2 border-b border-stone-200">
+            <i data-lucide="mail" class="w-4 h-4 text-terracota"></i>
+            <span>Correo de Agradecimiento</span>
+          </div>
+          <div class="bg-white p-3 rounded-lg border border-stone-200/80 space-y-2">
+            <p class="font-bold text-stone-800">De: Distrito Arocena &lt;cultura@museoarocena.com&gt;</p>
+            <p class="text-stone-600"><strong>Asunto:</strong> Gracias por ser parte de la Noche de Jazz en el Patio</p>
+            <hr class="border-stone-100">
+            <p class="text-stone-700 leading-relaxed">
+              Estimado(a) visitante, fue un deleite tenerte en el Museo Arocena. Como sabemos que te interesan las experiencias con <strong>vino y gastronomía</strong>, te reservamos una cortesía para la próxima <em>Cata del Desierto de Coahuila</em>.
+            </p>
+            <div class="text-center pt-2">
+              <span class="inline-block px-3 py-1.5 rounded-lg bg-terracota text-white font-bold text-[11px]">
+                Explorar Próximas Citas
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Canal 2: WhatsApp Concierge -->
+        <div class="bg-stone-50 rounded-xl p-4 border border-stone-200 text-xs">
+          <div class="flex items-center gap-2 text-stone-700 font-bold mb-3 pb-2 border-b border-stone-200">
+            <i data-lucide="message-circle" class="w-4 h-4 text-emerald-600"></i>
+            <span>Notificación WhatsApp Oficial</span>
+          </div>
+          <div class="bg-[#dcf8c6]/40 p-3.5 rounded-xl border border-emerald-200 space-y-2 shadow-sm">
+            <div class="flex items-center gap-2 mb-1">
+              <div class="w-6 h-6 rounded-full bg-terracota text-white text-[10px] flex items-center justify-center font-bold">A</div>
+              <span class="font-bold text-stone-900 text-xs">Museo Arocena Concierge</span>
+            </div>
+            <p class="text-stone-800 leading-relaxed text-[11px]">
+              ¡Hola! 🍷 Esperamos que hayas disfrutado tu velada en Distrito Arocena. Queremos compartirte que ya abrimos la agenda de la <strong>Cena-Galería de Maestros del Virreinato</strong>. ¿Te gustaría apartar tu lugar antes de que se agote?
+            </p>
+            <span class="block text-[10px] text-stone-400 text-right">10:14 a.m. ✓✓</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="mt-6 text-right">
+        <button onclick="closeModal('postvisit-modal')" class="px-5 py-2 text-xs font-bold text-white bg-terracota hover:bg-terracota-dark rounded-xl transition-colors">
+          Entendido
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6. Modal: Panel Administrativo (Dashboard de Analíticas) -->
+  <div id="admin-modal" class="modal-backdrop fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+    <div id="admin-modal-content" class="bg-white rounded-2xl max-w-4xl w-full shadow-2xl modal-enter modal-enter-active max-h-[92vh] overflow-y-auto">
+      <!-- Inyectado por JS -->
+    </div>
+  </div>
+
+  <!-- Toast Notification Flotante -->
+  <div id="toast-notification" class="fixed bottom-5 right-5 z-50 bg-stone-900 text-white px-4 py-3 rounded-xl shadow-xl flex items-center gap-3 border border-stone-700 hidden opacity-0 translate-y-8">
+    <div id="toast-icon"></div>
+    <span id="toast-message" class="text-xs font-medium"></span>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
